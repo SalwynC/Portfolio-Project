@@ -13,13 +13,13 @@ export function PageLoader() {
     document.documentElement.style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'
 
-    // Show loader for 5 seconds
+    // Show loader for 2 seconds
     const timer = setTimeout(() => {
       setIsVisible(false)
       // Re-enable scroll
       document.documentElement.style.overflow = 'auto'
       document.body.style.overflow = 'auto'
-    }, 5000)
+    }, 2000)
 
     return () => {
       clearTimeout(timer)
