@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AnimatedBackground } from "@/components/animated-background"
+import { PageLoader } from "@/components/page-loader"
 import "./globals.css"
 
 const _inter = Inter({ subsets: ["latin"] })
@@ -59,6 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased transition-colors duration-200">
+        <PageLoader />
         <ThemeProvider attribute="class" defaultTheme="dark">
           <AnimatedBackground />
           {children}
