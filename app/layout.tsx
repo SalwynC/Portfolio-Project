@@ -58,8 +58,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="font-sans antialiased transition-colors duration-200">
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+      <body className="font-sans antialiased transition-colors duration-200 bg-background text-foreground">
         <PageLoader />
         <ThemeProvider attribute="class" defaultTheme="dark">
           <AnimatedBackground />
