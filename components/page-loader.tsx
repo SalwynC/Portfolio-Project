@@ -16,8 +16,6 @@ export function PageLoader() {
     // Show loader for 3.5 seconds
     const timer = setTimeout(() => {
       setIsVisible(false)
-      // Trigger content fade-in animation
-      document.body.classList.add('content-visible')
       // Re-enable scroll
       document.documentElement.style.overflow = 'auto'
       document.body.style.overflow = 'auto'
@@ -47,7 +45,7 @@ export function PageLoader() {
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.8 }}
     >
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5" />
