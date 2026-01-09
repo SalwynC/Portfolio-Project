@@ -57,13 +57,20 @@ export function TypingText({ texts, typingSpeed = 100, deletingSpeed = 50, pause
   ])
 
   if (prefersReducedMotion) {
-    return <span>{texts[0]}</span>
+    return <span className="font-sans">{texts[0]}</span>
   }
+
+  const fontClasses = [
+    "font-sans",
+    "font-mono",
+    "font-semibold font-sans tracking-tight",
+    "font-sans italic",
+  ]
 
   return (
     <span className="inline-flex items-center">
-      <span>{currentText}</span>
-      <span className="w-[3px] h-8 bg-primary ml-1 animate-blink" />
+      <span className={fontClasses[currentTextIndex % fontClasses.length]}>{currentText}</span>
+      <span className="w-[3px] h-8 bg-primary ml-1 animate-blink shadow-[0_0_10px_rgba(0,169,146,0.55)]" />
     </span>
   )
 }

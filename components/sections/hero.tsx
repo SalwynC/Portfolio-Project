@@ -27,10 +27,10 @@ export function HeroSection() {
           transition={{ duration: 0.5 }}
           className="mb-6"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-sm font-mono text-muted-foreground">
-              <span className="text-primary">~/portfolio</span> <span className="text-foreground">$</span> whoami
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/50 bg-gradient-to-r from-primary/15 to-primary/5 backdrop-blur-md shadow-[0_8px_32px_rgba(0,169,146,0.1)] dark:from-primary/25 dark:to-primary/15 dark:border-primary/70 dark:shadow-[0_8px_32px_rgba(0,169,146,0.2)]">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+            <span className="text-sm font-mono text-foreground/80 dark:text-foreground/90 font-medium">
+              <span className="text-primary dark:text-primary font-semibold">~/portfolio</span> <span className="text-foreground dark:text-foreground/90">$</span> whoami
             </span>
           </div>
         </motion.div>
@@ -40,9 +40,9 @@ export function HeroSection() {
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 30, filter: "blur(10px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 leading-tight"
+          className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 leading-tight bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent dark:from-foreground dark:via-primary dark:to-foreground animate-gradient"
         >
-          <span className="text-primary/50 font-mono text-base sm:text-lg md:text-xl lg:text-2xl block mb-2 sm:mb-3">{"<Developer/>"}</span>
+          <span className="text-primary/60 font-mono text-base sm:text-lg md:text-xl lg:text-2xl block mb-2 sm:mb-3 animate-pulse">{'<Developer/>'}</span>
           {personalInfo.name}
         </motion.h1>
 
@@ -51,7 +51,7 @@ export function HeroSection() {
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-2xl sm:text-3xl md:text-4xl font-medium text-muted-foreground mb-6 h-12"
+          className="text-2xl sm:text-3xl md:text-4xl font-medium bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent drop-shadow-sm mb-6 h-12"
         >
           <TypingText texts={roles} />
         </motion.div>
@@ -61,7 +61,7 @@ export function HeroSection() {
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="text-lg text-muted-foreground max-w-xl mx-auto mb-8 leading-relaxed"
+          className="text-lg text-foreground/85 dark:text-foreground/90 max-w-xl mx-auto mb-8 leading-relaxed drop-shadow-[0_0_12px_rgba(0,169,146,0.2)] font-medium"
         >
           {personalInfo.tagline}
         </motion.p>
@@ -73,9 +73,9 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
-          <Button asChild size="lg" className="gap-2 group glow-primary-sm">
+          <Button asChild size="lg" className="gap-2 group glow-primary-sm shadow-md dark:shadow-[0_0_24px_rgba(0,169,146,0.25)]">
             <Link href="#projects">
-              <Code2 className="h-4 w-4" />
+              <Code2 className="h-5 w-5" />
               View My Work
               <motion.span
                 className="inline-block"
@@ -90,13 +90,13 @@ export function HeroSection() {
             asChild
             variant="outline"
             size="lg"
-            className="gap-2 bg-transparent border-primary/30 hover:bg-primary/10"
+            className="gap-2 bg-transparent border-primary/30 hover:bg-primary/10 dark:border-primary/60 dark:hover:bg-primary/20 text-foreground dark:text-foreground"
           >
             <Link href="#contact">Get In Touch</Link>
           </Button>
-          <Button asChild variant="ghost" size="lg" className="gap-2">
+          <Button asChild variant="ghost" size="lg" className="gap-2 text-foreground/90 hover:text-primary">
             <Link href="https://drive.google.com/file/d/1zX2l0fhSgHljcImc8Y0cieCoPphbXEKd/preview" target="_blank" rel="noopener noreferrer">
-              <FileText className="h-4 w-4" />
+              <FileText className="h-5 w-5" />
               Resume
             </Link>
           </Button>
@@ -118,7 +118,7 @@ export function HeroSection() {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-lg bg-muted/50 text-muted-foreground hover:text-primary hover:bg-primary/10 hover:-translate-y-1 transition-all duration-200 border border-transparent hover:border-primary/30"
+              className="p-3 rounded-lg bg-muted/50 dark:bg-muted/30 text-muted-foreground dark:text-foreground/80 hover:text-primary hover:bg-primary/10 hover:-translate-y-1 transition-all duration-200 border border-transparent hover:border-primary/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               aria-label={social.label}
             >
               <social.icon className="h-5 w-5" />

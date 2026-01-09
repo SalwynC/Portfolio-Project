@@ -20,7 +20,7 @@ export function AboutSection() {
   ]
 
   return (
-    <section id="about" className="py-24 px-6" aria-labelledby="about-heading">
+    <section id="about" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8" aria-labelledby="about-heading">
       <div className="max-w-4xl mx-auto">
         <div ref={ref}>
           <SectionHeader number="01" title="About Me" />
@@ -86,7 +86,7 @@ export function AboutSection() {
                       src="/salwyn_christopher.jpg"
                       alt="Salwyn Christopher - Software Engineer"
                       fill
-                      priority={false}
+                      priority
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover object-top transition-all duration-700 group-hover:scale-105"
                     />

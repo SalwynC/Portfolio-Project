@@ -71,13 +71,13 @@ export function AnimatedBackground() {
       <div
         className="absolute inset-0 transition-all duration-500 ease-out will-change-transform"
         style={{
-          background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, var(--primary) 0%, transparent 50%)`,
-          opacity: 0.05,
+          background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, var(--primary) 0%, transparent 60%)`,
+          opacity: 0.08,
         }}
       />
 
       {/* Animated gradient mesh */}
-      <div className="absolute inset-0 animate-gradient bg-gradient-to-br from-primary/5 via-transparent to-chart-2/5" />
+      <div className="absolute inset-0 animate-gradient bg-gradient-to-br from-primary/8 via-transparent to-chart-2/8" />
 
       {/* Tech grid overlay */}
       <div className="absolute inset-0 tech-grid opacity-[0.02] dark:opacity-[0.04] animate-grid-pulse" />

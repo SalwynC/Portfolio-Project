@@ -15,7 +15,7 @@ export function EducationSection() {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <section className="py-24 px-6" aria-labelledby="education-heading">
+    <section id="education" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8" aria-labelledby="education-heading">
       <div className="max-w-4xl mx-auto">
         <div ref={ref}>
           <SectionHeader number="04" title="Education" />
@@ -53,37 +53,22 @@ export function EducationSection() {
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="p-4 rounded-lg bg-muted/50 border border-border">
-                      <h4 className="flex items-center gap-2 font-medium mb-3">
+                  <div className="grid md:grid-cols-1 gap-6">
+                    <div className="p-4 rounded-lg bg-muted/50 border border-border dark:bg-muted/20 dark:border-border">
+                      <h4 className="flex items-center gap-2 font-medium mb-3 text-foreground">
                         <BookOpen className="h-4 w-4 text-primary" />
                         Relevant Coursework
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {edu.coursework.map((course) => (
-                          <Badge key={course} variant="secondary" className="text-xs bg-background border-border">
+                          <Badge key={course} variant="secondary" className="text-xs bg-background border border-border dark:bg-card dark:border-border dark:text-foreground">
                             {course}
                           </Badge>
                         ))}
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-lg bg-muted/50 border border-border">
-                      <h4 className="flex items-center gap-2 font-medium mb-3">
-                        <Award className="h-4 w-4 text-primary" />
-                        Achievements
-                      </h4>
-                      <ul className="space-y-2">
-                        {edu.achievements.map((achievement) => (
-                          <li key={achievement} className="flex gap-2 text-sm text-muted-foreground">
-                            <span className="text-primary shrink-0 font-mono" aria-hidden="true">
-                              {"->"}
-                            </span>
-                            {achievement}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+
                   </div>
                 </CardContent>
               </Card>

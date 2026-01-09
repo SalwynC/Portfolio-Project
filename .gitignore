@@ -25,3 +25,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# markdown files (except README)
+CERTIFICATE_IMAGES_SETUP.md
+CERTIFICATIONS_GUIDE.md
+*.md
+!README.md

@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { skills } from "@/lib/data"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Code2, Layers, Wrench, Lightbulb, ChevronRight } from "lucide-react"
@@ -26,6 +26,45 @@ export function SkillsSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const prefersReducedMotion = useReducedMotion()
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null)
+  const codeLines = [
+    (
+      <span key="line-1" className="text-muted-foreground">
+        <span className="text-primary">const</span> developer = {"{"}
+      </span>
+    ),
+    (
+      <span key="line-2" className="text-muted-foreground ml-4">
+        name: <span className="text-green-400">"Salwyn Christopher"</span>,
+      </span>
+    ),
+    (
+      <span key="line-3" className="text-muted-foreground ml-4">
+        skills: [<span className="text-yellow-400">"TypeScript"</span>, <span className="text-yellow-400">"React"</span>, <span className="text-yellow-400">"Node.js"</span>, ...],
+      </span>
+    ),
+    (
+      <span key="line-4" className="text-muted-foreground ml-4">
+        passion: <span className="text-green-400">"Building great software"</span>,
+      </span>
+    ),
+    (
+      <span key="line-5" className="text-muted-foreground ml-4">
+        available: <span className="text-blue-400">true</span>
+      </span>
+    ),
+    (
+      <span key="line-6" className="text-muted-foreground">{"}"};</span>
+    ),
+  ]
+  const [visibleLines, setVisibleLines] = useState<number>(prefersReducedMotion ? codeLines.length : 0)
+
+  useEffect(() => {
+    if (prefersReducedMotion) return
+    if (!isInView) return
+    if (visibleLines >= codeLines.length) return
+    const t = setTimeout(() => setVisibleLines(v => Math.min(v + 1, codeLines.length)), 160)
+    return () => clearTimeout(t)
+  }, [prefersReducedMotion, isInView, visibleLines])
 
   return (
     <section id="skills" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 bg-muted/30" aria-labelledby="skills-heading">
@@ -112,27 +151,14 @@ export function SkillsSection() {
               <span className="ml-2 text-xs">skills.ts</span>
             </div>
             <code className="text-muted-foreground">
-              <span className="text-primary">const</span> developer = {"{"}
-              <br />
-              <span className="ml-4">
-                name: <span className="text-green-400">"Salwyn Christopher"</span>,
-              </span>
-              <br />
-              <span className="ml-4">
-                skills: [<span className="text-yellow-400">"TypeScript"</span>,{" "}
-                <span className="text-yellow-400">"React"</span>, <span className="text-yellow-400">"Node.js"</span>,
-                ...],
-              </span>
-              <br />
-              <span className="ml-4">
-                passion: <span className="text-green-400">"Building great software"</span>,
-              </span>
-              <br />
-              <span className="ml-4">
-                available: <span className="text-blue-400">true</span>
-              </span>
-              <br />
-              {"}"};
+              {codeLines.slice(0, visibleLines).map((line, i) => (
+                <motion.div key={`code-line-${i}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="leading-6">
+                  {line}
+                </motion.div>
+              ))}
+              {visibleLines < codeLines.length && (
+                <span className="inline-block w-[6px] h-4 bg-primary ml-1 align-baseline animate-blink shadow-[0_0_10px_rgba(0,169,146,0.6)]" />
+              )}
             </code>
           </motion.div>
         </div>

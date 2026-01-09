@@ -28,7 +28,7 @@ export function ExperienceSection() {
   }, [isInView])
 
   return (
-    <section id="experience" className="py-24 px-6 bg-muted/30" aria-labelledby="experience-heading">
+    <section id="experience" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 bg-muted/30" aria-labelledby="experience-heading">
       <div className="max-w-4xl mx-auto">
         <div ref={ref}>
           <SectionHeader number="02" title="Where I've Worked" />
@@ -133,7 +133,7 @@ export function ExperienceSection() {
                       <Badge
                         key={tech}
                         variant="secondary"
-                        className="font-mono text-xs bg-primary/10 text-primary border-primary/20"
+                        className="font-mono text-xs bg-primary/15 text-primary border border-primary/30 dark:bg-primary/20 dark:text-primary dark:border-primary/40"
                       >
                         {tech}
                       </Badge>

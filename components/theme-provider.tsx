@@ -13,6 +13,11 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
       enableSystem={false}
       disableTransitionOnChange={false}
       storageKey="theme"
+      attribute="class"
+      defaultTheme="light"
+      themes={["light", "dark"]}
+      forcedTheme={undefined}
+      enableColorScheme={true}
     >
       {children}
     </NextThemesProvider>

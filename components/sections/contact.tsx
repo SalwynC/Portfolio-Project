@@ -134,7 +134,7 @@ export function ContactSection() {
     <section id="contact" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 bg-muted/30" aria-labelledby="contact-heading">
       <div className="w-full max-w-4xl mx-auto">
         <div ref={ref}>
-          <SectionHeader number="05" title="Get In Touch" centered />
+          <SectionHeader number="06" title="Get In Touch" centered />
 
           <motion.p
             initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
@@ -155,8 +155,8 @@ export function ContactSection() {
             {/* Contact Info */}
             <div className="md:col-span-2 space-y-6">
               {/* Terminal-style info card */}
-              <div className="p-4 rounded-lg bg-card border border-border overflow-hidden">
-                <div className="flex items-center gap-2 mb-3 pb-3 border-b border-border">
+              <div className="p-4 rounded-lg bg-card border border-border dark:border-border/60 overflow-hidden">
+                <div className="flex items-center gap-2 mb-3 pb-3 border-b border-border dark:border-border/60">
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
@@ -166,7 +166,7 @@ export function ContactSection() {
                   <p className="text-muted-foreground">
                     <span className="text-primary">$</span> cat contact_info.txt
                   </p>
-                  <div className="pl-4 space-y-1 text-muted-foreground">
+                  <div className="pl-4 space-y-1 text-muted-foreground dark:text-muted-foreground">
                     <p>
                       <span className="text-primary">email:</span> {personalInfo.email}
                     </p>
@@ -183,15 +183,15 @@ export function ContactSection() {
 
               <motion.a
                 href={`mailto:${personalInfo.email}`}
-                className="flex items-start gap-4 group p-4 rounded-lg bg-card border border-border hover:border-primary/30 transition-colors"
+                className="flex items-start gap-4 group p-4 rounded-lg bg-card border border-border dark:border-border/60 hover:border-primary/30 dark:hover:border-primary/40 transition-colors"
                 whileHover={prefersReducedMotion ? {} : { x: 4 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors">
+                <div className="p-3 bg-primary/10 dark:bg-primary/20 rounded-xl group-hover:bg-primary/20 dark:group-hover:bg-primary/30 transition-colors">
                   <Mail className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-medium mb-1">Email</h3>
+                  <h3 className="font-medium mb-1 text-foreground">Email</h3>
                   <p className="text-muted-foreground text-sm group-hover:text-primary transition-colors">
                     {personalInfo.email}
                   </p>
@@ -199,15 +199,15 @@ export function ContactSection() {
               </motion.a>
 
               <motion.div
-                className="flex items-start gap-4 p-4 rounded-lg bg-card border border-border"
+                className="flex items-start gap-4 p-4 rounded-lg bg-card border border-border dark:border-border/60"
                 whileHover={prefersReducedMotion ? {} : { x: 4 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="p-3 bg-primary/10 rounded-xl">
+                <div className="p-3 bg-primary/10 dark:bg-primary/20 rounded-xl">
                   <MapPin className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-medium mb-1">Location</h3>
+                  <h3 className="font-medium mb-1 text-foreground">Location</h3>
                   <p className="text-muted-foreground text-sm">{personalInfo.location}</p>
                 </div>
               </motion.div>
@@ -223,7 +223,7 @@ export function ContactSection() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-lg bg-card border border-border text-muted-foreground hover:text-primary hover:border-primary/30 transition-all"
+                    className="p-3 rounded-lg bg-card border border-border dark:border-border/60 text-muted-foreground hover:text-primary hover:border-primary/30 dark:hover:border-primary/40 transition-all"
                     aria-label={social.label}
                   >
                     <social.icon className="h-5 w-5" />
@@ -238,37 +238,37 @@ export function ContactSection() {
                 <motion.div
                   initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="bg-card border border-primary/30 rounded-xl p-8 text-center"
+                  className="bg-card border border-primary/30 dark:border-primary/40 rounded-xl p-8 text-center"
                 >
                   <motion.div
-                    className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4"
+                    className="w-16 h-16 bg-primary/20 dark:bg-primary/30 rounded-full flex items-center justify-center mx-auto mb-4"
                     initial={prefersReducedMotion ? {} : { scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", delay: 0.2 }}
                   >
                     <CheckCircle2 className="h-8 w-8 text-primary" />
                   </motion.div>
-                  <h3 className="text-xl font-semibold mb-2">Message Sent!</h3>
+                  <h3 className="text-xl font-semibold mb-2 text-foreground">Message Sent!</h3>
                   <p className="text-muted-foreground mb-4">Thank you for reaching out. I'll get back to you soon!</p>
                   <Button
                     variant="outline"
-                    className="bg-transparent border-primary/30"
+                    className="bg-transparent border-primary/30 dark:border-primary/40 dark:hover:bg-primary/20"
                     onClick={() => setIsSubmitted(false)}
                   >
                     Send Another Message
                   </Button>
                 </motion.div>
               ) : (
-                <div className="bg-card border border-border rounded-xl overflow-hidden">
+                <div className="bg-card border border-border dark:border-border/60 rounded-xl overflow-hidden">
                   {/* Form header */}
-                  <div className="flex items-center gap-2 px-4 py-2 border-b border-border bg-muted/50">
+                  <div className="flex items-center gap-2 px-4 py-2 border-b border-border dark:border-border/60 bg-muted/50 dark:bg-muted/20">
                     <Terminal className="h-4 w-4 text-primary" />
                     <span className="text-xs font-mono text-muted-foreground">new_message.form</span>
                   </div>
                   <form onSubmit={handleSubmit} className="p-6 space-y-4" noValidate>
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="name" className="text-sm font-medium">
+                        <Label htmlFor="name" className="text-sm font-medium text-foreground">
                           Name
                         </Label>
                         <Input
@@ -278,7 +278,7 @@ export function ContactSection() {
                           onChange={handleChange}
                           onBlur={handleBlur}
                           placeholder=""
-                          className={`bg-background border-border focus:border-primary ${errors.name && touched.name ? "border-destructive focus-visible:ring-destructive" : ""}`}
+                          className={`bg-background dark:bg-card border-border dark:border-border/60 focus:border-primary dark:focus:border-primary ${errors.name && touched.name ? "border-destructive focus-visible:ring-destructive" : ""}`}
                           aria-invalid={errors.name && touched.name ? "true" : "false"}
                           aria-describedby={errors.name ? "name-error" : undefined}
                         />
@@ -290,7 +290,7 @@ export function ContactSection() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="email" className="text-sm font-medium">
+                        <Label htmlFor="email" className="text-sm font-medium text-foreground">
                           Email
                         </Label>
                         <Input
@@ -301,7 +301,7 @@ export function ContactSection() {
                           onChange={handleChange}
                           onBlur={handleBlur}
                           placeholder=""
-                          className={`bg-background border-border focus:border-primary ${errors.email && touched.email ? "border-destructive focus-visible:ring-destructive" : ""}`}
+                          className={`bg-background dark:bg-card border-border dark:border-border/60 focus:border-primary dark:focus:border-primary ${errors.email && touched.email ? "border-destructive focus-visible:ring-destructive" : ""}`}
                           aria-invalid={errors.email && touched.email ? "true" : "false"}
                           aria-describedby={errors.email ? "email-error" : undefined}
                         />
@@ -314,7 +314,7 @@ export function ContactSection() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="subject" className="text-sm font-medium">
+                      <Label htmlFor="subject" className="text-sm font-medium text-foreground">
                         Subject
                       </Label>
                       <Input
@@ -324,7 +324,7 @@ export function ContactSection() {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         placeholder="What's this about?"
-                        className={`bg-background border-border focus:border-primary ${errors.subject && touched.subject ? "border-destructive focus-visible:ring-destructive" : ""}`}
+                        className={`bg-background dark:bg-card border-border dark:border-border/60 focus:border-primary dark:focus:border-primary ${errors.subject && touched.subject ? "border-destructive focus-visible:ring-destructive" : ""}`}
                         aria-invalid={errors.subject && touched.subject ? "true" : "false"}
                         aria-describedby={errors.subject ? "subject-error" : undefined}
                       />
@@ -336,7 +336,7 @@ export function ContactSection() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="message" className="text-sm font-medium">
+                      <Label htmlFor="message" className="text-sm font-medium text-foreground">
                         Message
                       </Label>
                       <Textarea
@@ -347,7 +347,7 @@ export function ContactSection() {
                         onBlur={handleBlur}
                         placeholder="Your message..."
                         rows={5}
-                        className={`bg-background border-border focus:border-primary resize-none ${errors.message && touched.message ? "border-destructive focus-visible:ring-destructive" : ""}`}
+                        className={`bg-background dark:bg-card border-border dark:border-border/60 focus:border-primary dark:focus:border-primary resize-none ${errors.message && touched.message ? "border-destructive focus-visible:ring-destructive" : ""}`}
                         aria-invalid={errors.message && touched.message ? "true" : "false"}
                         aria-describedby={errors.message ? "message-error" : undefined}
                       />

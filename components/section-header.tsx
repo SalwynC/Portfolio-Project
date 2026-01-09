@@ -18,18 +18,18 @@ export function SectionHeader({ number, title, centered = false }: SectionHeader
   const content = (
     <>
       {number && (
-        <span className="text-primary font-mono text-base sm:text-lg flex items-center gap-1">
+        <span className="text-primary font-mono text-base sm:text-lg flex items-center gap-1 animate-pulse">
           <span className="text-muted-foreground/50">{"<"}</span>
           {number}
           <span className="text-muted-foreground/50">{"/>"}</span>
         </span>
       )}
-      <span className="relative">
+      <span className="relative text-foreground drop-shadow-sm font-semibold">
         {title}
         {/* Underline decoration */}
-        <span className="absolute -bottom-1 left-0 w-full h-px bg-gradient-to-r from-primary/50 to-transparent" />
+        <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-primary via-primary/50 to-transparent" />
       </span>
-      {!centered && <span className="h-px bg-border flex-1 max-w-xs" />}
+      {!centered && <span className="h-px bg-gradient-to-r from-border via-border to-transparent flex-1 max-w-xs" />}
     </>
   )
 

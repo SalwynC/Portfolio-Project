@@ -37,7 +37,7 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <>
       <Card
-        className="group h-full overflow-hidden bg-card hover:shadow-xl transition-all duration-300 cursor-pointer border-border hover:border-primary/50 focus-within:ring-2 focus-within:ring-primary relative"
+        className="group h-full overflow-hidden bg-card dark:bg-card hover:shadow-xl transition-all duration-300 cursor-pointer border border-border dark:border-border/70 hover:border-primary/50 dark:hover:border-primary/50 focus-within:ring-2 focus-within:ring-primary relative"
         onClick={() => setIsModalOpen(true)}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -88,13 +88,13 @@ export function ProjectCard({ project }: { project: Project }) {
               <Badge
                 key={tech}
                 variant="secondary"
-                className="text-xs font-mono bg-primary/10 text-primary border-primary/20"
+                className="text-xs font-mono bg-primary/15 text-primary border border-primary/30 dark:bg-primary/20 dark:text-primary dark:border-primary/40"
               >
                 {tech}
               </Badge>
             ))}
             {project.technologies.length > 3 && (
-              <Badge variant="secondary" className="text-xs font-mono bg-muted text-muted-foreground">
+              <Badge variant="secondary" className="text-xs font-mono bg-muted dark:bg-muted/30 text-muted-foreground dark:text-muted-foreground border border-border dark:border-border/60">
                 +{project.technologies.length - 3}
               </Badge>
             )}
@@ -123,7 +123,7 @@ export function ProjectCard({ project }: { project: Project }) {
             />
 
             <motion.div
-              className="relative w-full max-w-2xl bg-card rounded-xl shadow-2xl border border-border overflow-hidden"
+              className="relative w-full max-w-2xl bg-card dark:bg-card rounded-xl shadow-2xl border border-border dark:border-border/70 overflow-hidden"
               initial={prefersReducedMotion ? {} : { scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}

@@ -21,7 +21,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="py-12 px-6 border-t border-border relative">
+    <footer className="py-12 px-6 border-t border-border dark:border-border/60 relative">
       {/* Back to top button */}
       <motion.div
         className="absolute -top-6 left-1/2 -translate-x-1/2"
@@ -33,7 +33,7 @@ export function Footer() {
           variant="outline"
           size="icon"
           onClick={scrollToTop}
-          className="rounded-full bg-background border-border hover:border-primary/50 hover:bg-primary/10"
+          className="rounded-full bg-background dark:bg-card border-border dark:border-border/60 hover:border-primary/50 dark:hover:border-primary/50 hover:bg-primary/10 dark:hover:bg-primary/20"
           aria-label="Back to top"
         >
           <ArrowUp className="h-4 w-4" />
