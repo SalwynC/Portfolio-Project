@@ -78,21 +78,17 @@ export function ContactSection() {
     setIsSubmitting(true)
     
     try {
-      // Using Web3Forms API to send email
-      const response = await fetch('https://api.web3forms.com/submit', {
+      // Send to backend API
+      const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
         },
         body: JSON.stringify({
-          access_key: 'YOUR_WEB3FORMS_ACCESS_KEY_HERE', // You need to get this from web3forms.com
           name: formData.name,
           email: formData.email,
           subject: formData.subject,
           message: formData.message,
-          from_name: formData.name,
-          replyto: formData.email,
         }),
       })
 
@@ -102,11 +98,18 @@ export function ContactSection() {
         setIsSubmitted(true)
         setFormData({ name: "", email: "", subject: "", message: "" })
         setTouched({})
+        
+        // Auto-reset success message after 5 seconds
+        setTimeout(() => {
+          setIsSubmitted(false)
+        }, 5000)
       } else {
-        alert('Failed to send message. Please try again.')
+        alert(result.message || 'Failed to send message. Please try again.')
       }
     } catch (error) {
-      console.error('Error sending message:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error sending message:', error)
+      }
       alert('Failed to send message. Please try again.')
     } finally {
       setIsSubmitting(false)
