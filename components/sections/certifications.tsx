@@ -113,26 +113,24 @@ export function CertificationsSection() {
                 >
                   {/* Certificate Image */}
                   <motion.div
-                    className="relative h-48 bg-gradient-to-br from-muted/30 to-muted/50 overflow-hidden flex items-center justify-center"
+                    className="relative h-48 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700 dark:to-slate-800 overflow-hidden flex items-center justify-center border border-slate-200 dark:border-slate-600"
                     variants={imageVariants}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${cert.badgeColor} opacity-20`} />
-                    
                     {/* Actual Certificate Image */}
                     {cert.image && (
                       <motion.div
-                        className="relative w-full h-full flex items-center justify-center"
-                        whileHover={{ scale: 1.12 }}
+                        className="relative w-full h-full flex items-center justify-center z-10 p-2"
+                        whileHover={{ scale: 1.06 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
                       >
                         <img
                           src={cert.image}
                           alt={cert.title}
-                          className="h-40 w-auto drop-shadow-2xl brightness-110 dark:brightness-125 z-10 object-contain"
-                          loading="lazy"
+                          className="h-auto max-h-44 w-auto max-w-full drop-shadow-md brightness-100 dark:brightness-105 z-10 object-contain"
+                          loading="eager"
                           onError={(e) => {
-                            // Fallback to icon if image fails to load
                             console.error(`Image failed to load: ${cert.image}`)
+                            e.currentTarget.style.display = 'none'
                           }}
                         />
                       </motion.div>
@@ -247,29 +245,27 @@ export function CertificationsSection() {
 
                   {/* Certificate Image */}
                   <motion.div
-                    className="relative h-64 md:h-96 bg-gradient-to-br from-muted/30 to-background flex items-center justify-center overflow-hidden"
+                    className="relative h-64 md:h-96 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700 dark:to-slate-800 flex items-center justify-center overflow-hidden border-b border-slate-200 dark:border-slate-600"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${selectedCert.badgeColor} opacity-50`} />
-                    
                     {/* Actual Certificate Image */}
                     {selectedCert.image && (
                       <motion.div
-                        className="relative w-full h-full"
+                        className="relative w-full h-full flex items-center justify-center p-4"
                         initial={{ scale: 0.95, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ delay: 0.1, duration: 0.5 }}
                       >
-                        <Image
+                        <img
                           src={selectedCert.image}
                           alt={selectedCert.title}
-                          fill
-                          className="object-contain p-6 relative z-10 brightness-110"
-                          priority={true}
-                          onError={() => {
-                            // Fallback handled by Next.js
+                          className="h-auto max-h-full w-auto max-w-full drop-shadow-lg brightness-100 dark:brightness-105 object-contain"
+                          loading="eager"
+                          onError={(e) => {
+                            console.error(`Modal image failed to load: ${selectedCert.image}`)
+                            e.currentTarget.style.display = 'none'
                           }}
                         />
                       </motion.div>
