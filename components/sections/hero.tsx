@@ -131,17 +131,23 @@ export function HeroSection() {
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.9 }}
-          className="mt-8 sm:mt-12 md:mt-16 mb-8 grid grid-cols-3 gap-3 sm:gap-6 md:gap-8 max-w-[280px] sm:max-w-md md:max-w-lg mx-auto px-2 sm:px-4"
+          className="mt-8 sm:mt-12 md:mt-16 mb-12 grid grid-cols-3 gap-6 sm:gap-8 md:gap-12 w-full max-w-2xl mx-auto px-4 sm:px-6 md:px-8"
         >
           {[
             { value: "3+", label: "Internships" },
             { value: "4+", label: "Projects Built" },
             { value: "10+", label: "Technologies" },
           ].map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary font-mono">{stat.value}</div>
-              <div className="text-[9px] sm:text-xs md:text-sm text-muted-foreground whitespace-nowrap leading-tight">{stat.label}</div>
-            </div>
+            <motion.div
+              key={index}
+              className="text-center"
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.95 + index * 0.1 }}
+            >
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary font-mono mb-2">{stat.value}</div>
+              <div className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed">{stat.label}</div>
+            </motion.div>
           ))}
         </motion.div>
       </div>
