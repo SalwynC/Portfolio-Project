@@ -26,45 +26,44 @@ export function SkillsSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const prefersReducedMotion = useReducedMotion()
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null)
-  const codeLines = [
-    (
-      <span key="line-1" className="text-muted-foreground">
-        <span className="text-primary">const</span> developer = {"{"}
-      </span>
-    ),
-    (
-      <span key="line-2" className="text-muted-foreground ml-4">
-        name: <span className="text-green-400">"Salwyn Christopher"</span>,
-      </span>
-    ),
-    (
-      <span key="line-3" className="text-muted-foreground ml-4">
-        skills: [<span className="text-yellow-400">"TypeScript"</span>, <span className="text-yellow-400">"React"</span>, <span className="text-yellow-400">"Node.js"</span>, ...],
-      </span>
-    ),
-    (
-      <span key="line-4" className="text-muted-foreground ml-4">
-        passion: <span className="text-green-400">"Building great software"</span>,
-      </span>
-    ),
-    (
-      <span key="line-5" className="text-muted-foreground ml-4">
-        available: <span className="text-blue-400">true</span>
-      </span>
-    ),
-    (
-      <span key="line-6" className="text-muted-foreground">{"}"};</span>
-    ),
-  ]
-  const [visibleLines, setVisibleLines] = useState<number>(prefersReducedMotion ? codeLines.length : 0)
-
+  
+  // Typing animation state
+  const [typedCode, setTypedCode] = useState("")
+  const fullCode = `const developer = {
+  name: "Salwyn Christopher",
+  skills: ["TypeScript", "React", "Node.js", ...],
+  passion: "Building great software",
+  available: true
+};`
+  
   useEffect(() => {
-    if (prefersReducedMotion) return
+    if (prefersReducedMotion) {
+      setTypedCode(fullCode)
+      return
+    }
     if (!isInView) return
-    if (visibleLines >= codeLines.length) return
-    const t = setTimeout(() => setVisibleLines(v => Math.min(v + 1, codeLines.length)), 160)
-    return () => clearTimeout(t)
-  }, [prefersReducedMotion, isInView, visibleLines])
+
+    let currentIndex = 0
+    let timeout: NodeJS.Timeout
+
+    const typeText = () => {
+      if (currentIndex <= fullCode.length) {
+        setTypedCode(fullCode.slice(0, currentIndex))
+        currentIndex++
+        timeout = setTimeout(typeText, 40)
+      } else {
+        // Wait 3 seconds before restarting
+        timeout = setTimeout(() => {
+          currentIndex = 0
+          setTypedCode("")
+          typeText()
+        }, 3000)
+      }
+    }
+
+    timeout = setTimeout(typeText, 600)
+    return () => clearTimeout(timeout)
+  }, [isInView, fullCode, prefersReducedMotion])
 
   return (
     <section id="skills" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 bg-muted/30" aria-labelledby="skills-heading">
@@ -150,15 +149,37 @@ export function SkillsSection() {
               <div className="w-3 h-3 rounded-full bg-green-500/80" />
               <span className="ml-2 text-xs">skills.ts</span>
             </div>
-            <code className="text-muted-foreground">
-              {codeLines.slice(0, visibleLines).map((line, i) => (
-                <motion.div key={`code-line-${i}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="leading-6">
-                  {line}
-                </motion.div>
-              ))}
-              {visibleLines < codeLines.length && (
-                <span className="inline-block w-[6px] h-4 bg-primary ml-1 align-baseline animate-blink shadow-[0_0_10px_rgba(0,169,146,0.6)]" />
-              )}
+            <code className="text-muted-foreground min-h-[9rem] block">
+              {typedCode.split('\n').map((line, index) => {
+                // Parse and colorize the code
+                let coloredLine = line
+                if (line.includes('const')) {
+                  coloredLine = line.replace('const', '<span class="text-primary">const</span>')
+                }
+                if (line.includes('"Salwyn Christopher"')) {
+                  coloredLine = coloredLine.replace('"Salwyn Christopher"', '<span class="text-green-400">"Salwyn Christopher"</span>')
+                }
+                if (line.includes('"TypeScript"')) {
+                  coloredLine = coloredLine.replace('"TypeScript"', '<span class="text-yellow-400">"TypeScript"</span>')
+                }
+                if (line.includes('"React"')) {
+                  coloredLine = coloredLine.replace('"React"', '<span class="text-yellow-400">"React"</span>')
+                }
+                if (line.includes('"Node.js"')) {
+                  coloredLine = coloredLine.replace('"Node.js"', '<span class="text-yellow-400">"Node.js"</span>')
+                }
+                if (line.includes('"Building great software"')) {
+                  coloredLine = coloredLine.replace('"Building great software"', '<span class="text-green-400">"Building great software"</span>')
+                }
+                if (line.includes('true')) {
+                  coloredLine = coloredLine.replace('true', '<span class="text-blue-400">true</span>')
+                }
+                
+                return (
+                  <div key={index} className="leading-6" dangerouslySetInnerHTML={{ __html: coloredLine || '&nbsp;' }} />
+                )
+              })}
+              <span className="inline-block w-2 h-4 bg-primary animate-pulse ml-1" />
             </code>
           </motion.div>
         </div>

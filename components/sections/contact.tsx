@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { motion, useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { Send, Mail, MapPin, Loader2, CheckCircle2, Terminal, Github, Linkedin, Twitter } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -41,6 +41,39 @@ export function ContactSection() {
   const [touched, setTouched] = useState<Record<string, boolean>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  
+  // Typing animation state
+  const [typedText, setTypedText] = useState("")
+  const [isTyping, setIsTyping] = useState(true)
+  const fullText = `email: ${personalInfo.email}\nlocation: ${personalInfo.location}\nstatus: available for hire`
+  
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setTypedText(fullText)
+      return
+    }
+
+    let currentIndex = 0
+    let timeout: NodeJS.Timeout
+
+    const typeText = () => {
+      if (currentIndex <= fullText.length) {
+        setTypedText(fullText.slice(0, currentIndex))
+        currentIndex++
+        timeout = setTimeout(typeText, 50)
+      } else {
+        // Wait 3 seconds before restarting
+        timeout = setTimeout(() => {
+          currentIndex = 0
+          setTypedText("")
+          typeText()
+        }, 3000)
+      }
+    }
+
+    timeout = setTimeout(typeText, 500)
+    return () => clearTimeout(timeout)
+  }, [fullText, prefersReducedMotion])
 
   const validateField = (name: string, value: string): string | undefined => {
     switch (name) {
@@ -157,7 +190,7 @@ export function ContactSection() {
           >
             {/* Contact Info */}
             <div className="md:col-span-2 space-y-6">
-              {/* Terminal-style info card */}
+              {/* Terminal-style info card with typing animation */}
               <div className="p-4 rounded-lg bg-card border border-border dark:border-border/60 overflow-hidden">
                 <div className="flex items-center gap-2 mb-3 pb-3 border-b border-border dark:border-border/60">
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
@@ -169,17 +202,26 @@ export function ContactSection() {
                   <p className="text-muted-foreground">
                     <span className="text-primary">$</span> cat contact_info.txt
                   </p>
-                  <div className="pl-4 space-y-1 text-muted-foreground dark:text-muted-foreground">
-                    <p>
-                      <span className="text-primary">email:</span> {personalInfo.email}
-                    </p>
-                    <p>
-                      <span className="text-primary">location:</span> {personalInfo.location}
-                    </p>
-                    <p>
-                      <span className="text-primary">status:</span>{" "}
-                      <span className="text-green-500">available for hire</span>
-                    </p>
+                  <div className="pl-4 min-h-[4.5rem] text-muted-foreground dark:text-muted-foreground">
+                    {typedText.split('\n').map((line, index) => {
+                      const [key, ...valueParts] = line.split(': ')
+                      const value = valueParts.join(': ')
+                      return (
+                        <p key={index} className="mb-1">
+                          {key && (
+                            <>
+                              <span className="text-primary">{key}:</span>{' '}
+                              {key === 'status' ? (
+                                <span className="text-green-500">{value}</span>
+                              ) : (
+                                <span>{value}</span>
+                              )}
+                            </>
+                          )}
+                        </p>
+                      )
+                    })}
+                    <span className="inline-block w-2 h-4 bg-primary animate-pulse ml-1" />
                   </div>
                 </div>
               </div>
