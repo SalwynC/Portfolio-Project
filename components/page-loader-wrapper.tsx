@@ -35,13 +35,7 @@ export function PageLoaderWrapper({
     enabled,
   })
 
-  return (
-    <PageLoader
-      isLoading={isLoading}
-      onLoadingComplete={() => {
-        // Optional: Add custom logic when loader completes
-        // e.g., play an intro animation on page content
-      }}
-    />
-  )
+  // Note: PageLoader manages its own internal state (3.5s timeout)
+  // The isLoading state from usePageLoader hook is available for other use cases
+  return <PageLoader />
 }
