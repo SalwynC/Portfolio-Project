@@ -152,9 +152,9 @@ export const certifications = [
     credentialId: "41e3087c-fd5c-45b7-bb44-320c99152519",
     credentialUrl: "https://certificates.automationanywhere.com/41e3087c-fd5c-45b7-bb44-320c99152519?record_view=true",
     description: "Certified Essentials RPA Professional (Automation 360) - 2023",
-    image: "https://lh3.googleusercontent.com/d/1aaNfdoVJrVvfYW-DiDqnQWxykda1O7pv",
+    image: "https://drive.google.com/uc?export=view&id=1aaNfdoVJrVvfYW-DiDqnQWxykda1O7pv",
     badgeColor: "from-purple-500/20 to-pink-500/20",
   },
 ]
 
-export const categories = ["All", "Cloud", "Python Full Stack", "MERN Full Stack"]
+export const categories = ["All", "Cloud Computing", "Python Full Stack", "MERN Full Stack"]
