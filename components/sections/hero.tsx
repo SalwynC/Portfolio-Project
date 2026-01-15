@@ -131,24 +131,30 @@ export function HeroSection() {
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.9 }}
-          className="mt-8 sm:mt-12 md:mt-16 mb-12 grid grid-cols-3 gap-6 sm:gap-8 md:gap-12 w-full max-w-2xl mx-auto px-4 sm:px-6 md:px-8"
+          className="mt-12 sm:mt-16 md:mt-20 mb-16 sm:mb-20 flex items-center justify-center"
         >
-          {[
-            { value: "3+", label: "Internships" },
-            { value: "4+", label: "Projects Built" },
-            { value: "10+", label: "Technologies" },
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              className="text-center"
-              initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.95 + index * 0.1 }}
-            >
-              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary font-mono mb-2">{stat.value}</div>
-              <div className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed">{stat.label}</div>
-            </motion.div>
-          ))}
+          <div className="grid grid-cols-3 gap-8 sm:gap-12 md:gap-16 w-full max-w-3xl px-4">
+            {[
+              { value: "3+", label: "Internships" },
+              { value: "4+", label: "Projects Built" },
+              { value: "10+", label: "Technologies" },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                className="flex flex-col items-center justify-center gap-3"
+                initial={prefersReducedMotion ? {} : { opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.95 + index * 0.1 }}
+              >
+                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary font-mono leading-none">
+                  {stat.value}
+                </div>
+                <div className="text-sm sm:text-base md:text-lg text-muted-foreground text-center whitespace-nowrap font-medium">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
 
