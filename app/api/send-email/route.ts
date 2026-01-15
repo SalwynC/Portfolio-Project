@@ -16,25 +16,8 @@ const validateEmailConfig = () => {
   return { valid: true }
 }
 
-// Rate limiting map (simple in-memory, consider Redis for production)
-const rateLimitMap = new Map<string, number[]>()
-
-const checkRateLimit = (ip: string, maxRequests = 5, windowMs = 3600000) => {
-  const now = Date.now()
-  const userRequests = rateLimitMap.get(ip) || []
-  
-  // Remove old requests outside the window
-  const recentRequests = userRequests.filter(time => now - time < windowMs)
-  
-  if (recentRequests.length >= maxRequests) {
-    return { allowed: false, message: 'Too many requests. Please try again later.' }
-  }
-  
-  recentRequests.push(now)
-  rateLimitMap.set(ip, recentRequests)
-  
-  return { allowed: true }
-}
+// Note: Rate limiting disabled as per user request
+// For production, consider implementing with Redis
 
 const sanitizeInput = (input: string): string => {
   return input.trim().slice(0, 1000) // Limit length and trim
@@ -42,17 +25,6 @@ const sanitizeInput = (input: string): string => {
 
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting
-    const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'
-    const rateLimit = checkRateLimit(ip)
-    
-    if (!rateLimit.allowed) {
-      return NextResponse.json(
-        { success: false, message: rateLimit.message },
-        { status: 429 }
-      )
-    }
-
     // Validate environment variables
     const config = validateEmailConfig()
     if (!config.valid) {
@@ -109,10 +81,10 @@ export async function POST(request: NextRequest) {
     const sanitizedSubject = sanitizeInput(subject)
     const sanitizedMessage = sanitizeInput(message)
 
-    // Email to admin
+    // Email to admin (your Gmail address)
     const adminMailOptions = {
       from: process.env.SENDER_EMAIL,
-      to: process.env.SENDER_EMAIL, // Send to yourself
+      to: '2200032686cser@gmail.com', // Your Gmail address
       subject: `Portfolio Contact: ${sanitizedSubject}`,
       html: `
         <h2>New Contact Form Submission</h2>
